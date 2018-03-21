@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+ul,li{list-type:none;}
+*{margin:0;padding:0;}
+a{text-decoration:none;}
+.songMenu{border-left:1px solid #ccc;border-right:1px solid #ccc;width:900px;height:1664px;background-color:white;margin:0px auto;padding:40px;}
+.catflo{float:left;}
+.perCat{width:100%;height:auto;}
+.perCat .bigCata{width:71px;height:43px;line-height:43px;}
+.perCat .bigCata img{vertical-align:middle;}
+.perCat .bigCata span{font-weight:bold;font-size:14px;}
+.perCat .smallCata{width:799px;height:auto;margin-left:30px;}
+.perCat .smallCata ul li{width:auto;height:43px;line-height:43px;display:inline-block;font-size:12px;margin:0px 5px;}
+.songMenuMain{clear:both;}
+.songMenuMain ul{width:950px;height:1456px;margin:30px 0px 0px -50px;}
+.songMenuMain ul li{float:left;width:140px;height:188px;padding:0px 0px 30px 50px;}
+.songMenuMain ul li .songPercover{width:140px;height:140px;}
+.songMenuMain ul li .songPercover .songPercoverBottom{width:140px;height:27px;}
+.songMenuMain ul li a#songNameIndex{display:inline-block;width:140px;height:19px;font-size:15px;line-height:19px;margin:8px 0px 0px;}
+.songMenuMain ul li .listener{color:#666;font-size:14px;}
+.pageCenter{width:900px;height:26px;margin:-120px auto;}
+.songMenuBottomPager{width:450px;height:26px;margin:0px auto;}
+.songMenuBottomPager .songMenupageNum{display:inline-block;text-align:center;line-height:22px;font-size:14px;width:22px;height:22px;border:1px solid #666;border-radius:2px;}
+.pageNumColor{background-color:red;color:white;}
+.pageNumBorder{border:1px solid #80ffff;cursor:pointer;}
+.pageBA{width:66px;height:24px;border:1px solid #333;border-radius:2px;line-height:24px;padding:1px 5px;display:inline-block;font-size:13px;text-align:center;background:#F5F5F5;color:;}

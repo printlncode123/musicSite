@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+*{margin:0px;padding:0px;}
+ul{list-style-type:none;}
+ul li{list-type:none;}
+a{text-decoration:none;}
+.myRight{float:left;padding:20px 80px;}
+.myRight a{background-color:#2894ff; width:150px; height:50px;display:inline-block;line-height:50px;text-align:center;border-radius:1px;color:#fff;font-size:18px;}
+.modelDiv{display:none;z-index:9999;position:absolute;top:168px;left:418px;box-shadow: 0 5px 16px rgba(0,0,0,0.8);}
+.modelDiv .modelDivTop{width:100%;height:39px;line-height:39px;background-color:#000;}
+.modelDivCenter{padding:20px 40px;width:224px;border-right:1px solid #ccc;}
+.modelDivCenter .modelDivCenterLeft a{display:inline-block;width:224px;height:31px;text-align:center;line-height:31px;color:#fff;border-radius:1px;border:1px solid #ccc;}
+.modelDivCenterRight ul li{width:148px;height:39px;line-height:39px;font-size:12px;padding:10px;}
+.modelDivCenterRight ul li i{vertical-align:middle;}
+.modelDivCenterRight ul li a{display:inline-block;height:39px;line-height:39px;width:auto;text-align:center;padding-left:10px;}
+.phoneInfo{display:none;}
+.phoneInfo .phoneInfoClass ul li:hover{background:#666;color:#fff;}
+.logicon{font-size:40px;}

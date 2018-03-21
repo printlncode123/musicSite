@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+	    http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans
+	    http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+<!-- 组件扫描controller -->
+<context:component-scan base-package="cn.music.controller"/>
+<!-- 加载属性文件  -->
+<context:property-placeholder location="classpath:resource.properties"/>
+<!-- 静态资源解析js,css,img... -->
+<mvc:default-servlet-handler/><!-- spring3.0之前使用下面的 -->
+<!-- <mvc:resources location="/css/" mapping="/css/**"/>
+<mvc:resources location="/js/" mapping="/js/**"/>
+<mvc:resources location="/img/" mapping="/img/**"/>
+<mvc:resources location="/html/" mapping="/html/**"/>
+<mvc:resources location="/music/" mapping="/music/**"/>
+<mvc:resources location="/icon/" mapping="/icon/**"/>
+ -->
+<!-- 注解的映射器和适配器 -->
+<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+<bean class=" org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/> -->
+<!-- mvc的注解驱动,配置了此标签就不需要在配置注解的映射器和注解的适配器，mvc的注解驱动默认加载很多参数的方法，比如json转换解析器 -->
+<mvc:annotation-driven/>
+
+<!-- 视图解 析器 
+ 解析jsp视图，默认使用jstl标签
+-->
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+  <property name="prefix" value="/WEB-INF/jsp/"/>
+  <property name="suffix" value=".jsp"/>
+</bean> 
+<!-- 全局异常处理器 
+ 只要实现了HandlerExceptionResolver接口就是全局异常处理器
+ -->
+<!-- <bean class="cn.music.exception.MyGlobalExceptionHandler"/> -->
+<!-- 文件上传 -->
+ <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<!-- 设置最大上传的尺寸为5M -->
+  <property name="maxUploadSize" value="5242880"/>
+  <!-- 上传文件的编码 -->
+  <property name="defaultEncoding" value="UTF-8"/>
+</bean> 
+
+<!-- 配置拦截器 -->
+<mvc:interceptors>
+	<!-- 配置在mvc:interceptors下的拦截器拦截所有请求-->
+	<!-- <bean class="cn.music.intercepter.LoginIntercepter"/> -->
+	<!-- 对拦截器的设置 -->
+	<mvc:interceptor>
+		<!-- 配置在mvc:interceptor下的拦截器拦截指定的请求（通过mvc:mapping指定拦截的请求） -->
+		<mvc:mapping path="/myMusic"/>
+		<bean class="cn.music.intercepter.LoginIntercepter"/>
+	</mvc:interceptor>
+</mvc:interceptors>
+</beans>
+

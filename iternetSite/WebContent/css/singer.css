@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+*{margin:0;padding:0;}
+a{text-decoration:none;}
+ul{list-style-type:none;}
+ul li{list-type:none;}
+.singerContainer{border-left:1px solid #ccc;border-right:1px solid #ccc;width:985px;height:1493px;min-height:1493px;background-color:white;margin:0px auto;}
+.singerMiddle{float:left};
+.singerLeft{width:180px;height:878px;border-right:1px solid #ccc;background:#d8e0e0;}
+.singerLeftContent{width:160px;height:787px;padding:0px 10px 40px;margin-top:26px;}
+.singerLeft .singerLeftContent .singerCat{padding-top:25px;}
+.singerLeft .singerLeftContent .singerCat h2{font-weight:bold;font-size:16px;height:25px;padding-left: 14px;font-family: "Microsoft Yahei";}
+.singerLeft .singerLeftContent .singerCat ul li{width:133px;height:29px;padding-left:27px;font-size:12px;line-height:29px;font-family: "Microsoft Yahei";}
+.singerLeft .singerLeftContent .singerCat ul li a:before{content:"";position:absolute;width:5px;height:5px;background-color:grey;margin:12px 0px 0px -15px/* \e7a5 */}
+.singerLeft .singerLeftContent .singerCat ul:last-child:after{content: '';height: 1px;position: absolute;width: 160px;background: #ccc;margin-top: 10px;}
+.singerRight{width:719px;height:1413px;padding:40px;border-left:1px solid #ccc;/* margin-left:181px; */}
+.singerRightRuzhuTop{width:719px;height:42px;border-bottom:2px solid #c20c0c;}
+.singerRightRuzhuTop h3{float:left;font-weight:normal;font-size:24px;font-family:"Microsoft Yahei", Arial, Helvetica, sans-serif};
+.singerRightGlobal{width:995px;height:1493px;}
+.singerRightRuzhuTop .singerRightMore:hover{color:#666;}
+.singRightMainRuzhu{width:735px;height:368px; margin:20px 0px 0px -17px;}
+.singRightMainRuzhu .singerRightRuzhuContent ul li{float:left;width:130px;height:184px; padding-left:17px}
+.singRightMainRuzhu .singerRightRuzhuContent .ruzhuContentTop{width:130px;height:130px;}
+.singRightMainRuzhu .singerRightRuzhuContent p{margin-top:8px;width:100%;height:20px;line-height:20px;}
+.singerRightRuzhuContent p img{display:inline-block;float:right;margin-right: 1px;vertical-align: middle;}
+#restHotSinger li{width:140px;height:30px;padding-left:17px;line-height:30px;margin:5px 0px 5px -17px;float:left;font-size:12px;}

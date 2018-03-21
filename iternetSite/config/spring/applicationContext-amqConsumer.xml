@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+	<!-- 真正可以产生connection的connectionFactory -->
+	 <!-- <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="tcp://localhost:61616"/>
+	</bean> -->
+	<!-- spring用于管理真正 的connectionFactory的connectionFactory-->
+	 <!-- <bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+		<property name="targetConnectionFactory" ref="targetConnectionFactory"/>
+	</bean> --> 
+	<!-- 以订阅的方式发送消息，主题，一对多，不必需应答 -->
+	 <!-- <bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg value="topic"/>主题名字
+	</bean> --> 
+	<!-- 监听注册，直接登录 -->
+	<!-- 设置消息监听器 -->
+	<!-- <bean id="loginListener" class="cn.music.listener.LoginListener"/> -->
+	<!-- <bean id="addMenuListener" class="cn.music.listener.AddMenuListener"/>
+	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory"/>
+		<property name="destination" ref="topicDestination"/>
+		<property name="messageListener" ref="loginListener"/>
+		<property name="messageListener" ref="addMenuListener"/>
+	</bean> -->
+</beans>

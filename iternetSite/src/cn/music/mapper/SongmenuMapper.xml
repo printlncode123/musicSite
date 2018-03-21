@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.music.mapper.SongmenuMapper" >
+  <resultMap id="BaseResultMap" type="cn.music.po.Songmenu" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="menuName" property="menuname" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="menuIntroduct" property="menuintroduct" jdbcType="VARCHAR" />
+    <result column="tag" property="tag" jdbcType="VARCHAR" />
+    <result column="songId" property="songid" jdbcType="INTEGER" />
+    <result column="songDownloadId" property="songdownloadid" jdbcType="INTEGER" />
+    <result column="smid" property="smid" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="songcount" property="songcount" jdbcType="INTEGER" />
+    <result column="menuCover" property="menucover" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, menuName, createTime, updateTime, menuIntroduct, tag, songId, songDownloadId, 
+    smid, userid, songcount, menuCover
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.music.po.SongmenuExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from songmenu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from songmenu
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from songmenu
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.music.po.SongmenuExample" >
+    delete from songmenu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.music.po.Songmenu" >
+    insert into songmenu (id, menuName, createTime, 
+      updateTime, menuIntroduct, tag, 
+      songId, songDownloadId, smid, 
+      userid, songcount, menuCover
+      )
+    values (#{id,jdbcType=INTEGER}, #{menuname,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{menuintroduct,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}, 
+      #{songid,jdbcType=INTEGER}, #{songdownloadid,jdbcType=INTEGER}, #{smid,jdbcType=INTEGER}, 
+      #{userid,jdbcType=INTEGER}, #{songcount,jdbcType=INTEGER}, #{menucover,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.music.po.Songmenu" >
+    insert into songmenu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="menuname != null" >
+        menuName,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+      <if test="menuintroduct != null" >
+        menuIntroduct,
+      </if>
+      <if test="tag != null" >
+        tag,
+      </if>
+      <if test="songid != null" >
+        songId,
+      </if>
+      <if test="songdownloadid != null" >
+        songDownloadId,
+      </if>
+      <if test="smid != null" >
+        smid,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="songcount != null" >
+        songcount,
+      </if>
+      <if test="menucover != null" >
+        menuCover,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="menuname != null" >
+        #{menuname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="menuintroduct != null" >
+        #{menuintroduct,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="songid != null" >
+        #{songid,jdbcType=INTEGER},
+      </if>
+      <if test="songdownloadid != null" >
+        #{songdownloadid,jdbcType=INTEGER},
+      </if>
+      <if test="smid != null" >
+        #{smid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="songcount != null" >
+        #{songcount,jdbcType=INTEGER},
+      </if>
+      <if test="menucover != null" >
+        #{menucover,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.music.po.SongmenuExample" resultType="java.lang.Integer" >
+    select count(*) from songmenu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update songmenu
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.menuname != null" >
+        menuName = #{record.menuname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null" >
+        updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.menuintroduct != null" >
+        menuIntroduct = #{record.menuintroduct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tag != null" >
+        tag = #{record.tag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.songid != null" >
+        songId = #{record.songid,jdbcType=INTEGER},
+      </if>
+      <if test="record.songdownloadid != null" >
+        songDownloadId = #{record.songdownloadid,jdbcType=INTEGER},
+      </if>
+      <if test="record.smid != null" >
+        smid = #{record.smid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.songcount != null" >
+        songcount = #{record.songcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.menucover != null" >
+        menuCover = #{record.menucover,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update songmenu
+    set id = #{record.id,jdbcType=INTEGER},
+      menuName = #{record.menuname,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      menuIntroduct = #{record.menuintroduct,jdbcType=VARCHAR},
+      tag = #{record.tag,jdbcType=VARCHAR},
+      songId = #{record.songid,jdbcType=INTEGER},
+      songDownloadId = #{record.songdownloadid,jdbcType=INTEGER},
+      smid = #{record.smid,jdbcType=INTEGER},
+      userid = #{record.userid,jdbcType=INTEGER},
+      songcount = #{record.songcount,jdbcType=INTEGER},
+      menuCover = #{record.menucover,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.music.po.Songmenu" >
+    update songmenu
+    <set >
+      <if test="menuname != null" >
+        menuName = #{menuname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="menuintroduct != null" >
+        menuIntroduct = #{menuintroduct,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="songid != null" >
+        songId = #{songid,jdbcType=INTEGER},
+      </if>
+      <if test="songdownloadid != null" >
+        songDownloadId = #{songdownloadid,jdbcType=INTEGER},
+      </if>
+      <if test="smid != null" >
+        smid = #{smid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="songcount != null" >
+        songcount = #{songcount,jdbcType=INTEGER},
+      </if>
+      <if test="menucover != null" >
+        menuCover = #{menucover,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.music.po.Songmenu" >
+    update songmenu
+    set menuName = #{menuname,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      menuIntroduct = #{menuintroduct,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      songId = #{songid,jdbcType=INTEGER},
+      songDownloadId = #{songdownloadid,jdbcType=INTEGER},
+      smid = #{smid,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=INTEGER},
+      songcount = #{songcount,jdbcType=INTEGER},
+      menuCover = #{menucover,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

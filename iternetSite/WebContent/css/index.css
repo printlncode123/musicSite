@@ -1,0 +1,23 @@
+body{background-color:#f2f2f2;z-index:-10000;}
+.lunbobgcolor{width:100%;height:336px;background-image: url("../img/lunbo/lunbobg_0.jpg");top:100px;z-index:-9999;position:absolute;}
+.lunboright{width:254px;height:336px;position:absolute;top:100px;right:182px;}
+.lunboright img{width:254px;height:336px;}
+.indexDown{background-color:white;width:984px;height:1540px;min-height:1540px;margin:0px auto;}
+.bottom{float:left;}
+.indexDownleft{width:729px;height:1540px;border-left:1px solid #ccc;}
+.indexDownleft .main{width:689;height:1500px;margin:20px auto;}
+.indexDownleft .mainCat{width:680px;height:500px;margin:0px auto;}
+.indexDownleft .mainCat .mainhead{border-bottom:#C10D0C solid 2px;line-height:35px;width:680px;height:35px;background-image:url("../icon/cat.png");background-repeat:no-repeat;background-position:0px 4px;}
+.indexDownleft .mainCat .mainhead .sameflo{font-family:"Microsoft Yahei", Arial, Helvetica, sans-serif;}
+.indexDownleft .mainCat .mainhead .catname{font-size:20px;display:inline-block;;text-decoration:none;text-indent:40px;float:left;}
+.indexDownleft .mainCat .mainhead .tab{float:left;text-indent:40px;font-size:13px;}
+.indexDownleft .mainCat .mainhead .tab span:LAST-CHILD{opacity:0;}
+.indexDownleft .mainCat .mainhead .more{background-position:30px 0px;width:40px;height:28px;background-repeat:no-repeat;background-image:url("../icon/more.png");display:inline-block;;float:right;font-size:13px;}
+.indexDownleft .mainCat .mainContent ul{margin-top:20px;list-style:none;margin-left:-41px;}
+.indexDownleft .mainCat .mainContent ul li{float:left;position:relative;width:140px;height:204px;padding:0px 0px 15px 40px;}
+.indexDownleft .mainCat .mainContent ul li .opatrans{display:inline-block;width:140px;height:30px;line-height:30px;zoom:1;background: rgba(0, 0, 0, .5);margin-top:-30px;color:#ccc;}
+.indexDownleft .mainCat .mainContent ul li .opatrans .play{display:inline-block;float:right;}
+.indexDownleft .mainCat .mainContent ul li .opatrans .maincenterLine{display:inline-block;width:130px;height:30px;text-indent:10px;}
+.indexDownleft .mainCat .mainContent ul li a#songNameIndex{display:inline-block;width:140px;height:19px;font-size:14px;line-height:19px;margin:5px 0px;}
+.indexDownright{width:252px;height:1540px;background-color:;border-left:1px solid #ccc;border-right:1px solid #ccc;}
+/* hr{color:#ccc;} */

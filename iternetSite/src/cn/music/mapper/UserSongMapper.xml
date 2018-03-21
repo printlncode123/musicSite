@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.music.mapper.UserSongMapper" >
+  <resultMap id="BaseResultMap" type="cn.music.po.UserSong" >
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="songId" property="songid" jdbcType="INTEGER" />
+    <result column="downloadif" property="downloadif" jdbcType="INTEGER" />
+    <result column="loveif" property="loveif" jdbcType="INTEGER" />
+    <result column="songMenuId" property="songmenuid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    uid, songId, downloadif, loveif, songMenuId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.music.po.UserSongExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_song
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="cn.music.po.UserSongExample" >
+    delete from user_song
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.music.po.UserSong" >
+    insert into user_song (uid, songId, downloadif, 
+      loveif, songMenuId)
+    values (#{uid,jdbcType=INTEGER}, #{songid,jdbcType=INTEGER}, #{downloadif,jdbcType=INTEGER}, 
+      #{loveif,jdbcType=INTEGER}, #{songmenuid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.music.po.UserSong" >
+    insert into user_song
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="songid != null" >
+        songId,
+      </if>
+      <if test="downloadif != null" >
+        downloadif,
+      </if>
+      <if test="loveif != null" >
+        loveif,
+      </if>
+      <if test="songmenuid != null" >
+        songMenuId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="songid != null" >
+        #{songid,jdbcType=INTEGER},
+      </if>
+      <if test="downloadif != null" >
+        #{downloadif,jdbcType=INTEGER},
+      </if>
+      <if test="loveif != null" >
+        #{loveif,jdbcType=INTEGER},
+      </if>
+      <if test="songmenuid != null" >
+        #{songmenuid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.music.po.UserSongExample" resultType="java.lang.Integer" >
+    select count(*) from user_song
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_song
+    <set >
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.songid != null" >
+        songId = #{record.songid,jdbcType=INTEGER},
+      </if>
+      <if test="record.downloadif != null" >
+        downloadif = #{record.downloadif,jdbcType=INTEGER},
+      </if>
+      <if test="record.loveif != null" >
+        loveif = #{record.loveif,jdbcType=INTEGER},
+      </if>
+      <if test="record.songmenuid != null" >
+        songMenuId = #{record.songmenuid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_song
+    set uid = #{record.uid,jdbcType=INTEGER},
+      songId = #{record.songid,jdbcType=INTEGER},
+      downloadif = #{record.downloadif,jdbcType=INTEGER},
+      loveif = #{record.loveif,jdbcType=INTEGER},
+      songMenuId = #{record.songmenuid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

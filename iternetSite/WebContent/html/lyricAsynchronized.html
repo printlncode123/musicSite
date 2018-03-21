@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../js/jquery.js"></script>
+</head>
+<body>
+	<audio controls="controls">
+		<source src="../music/I Love You-Stewart Mac-1769374012-0.mp3">
+	</audio>
+	<div id="lyricContainer">
+		<!-- <ul></ul> -->
+	</div>
+</body>
+<script type="text/javascript">
+	$(function(){
+		var lyric;
+		var lines;
+		$.get("../music/I Love You-Stewart Mac-1769374012-0.lrc", function(data){
+			var lrcContent;
+			var r=parseList(data);
+			var audio=$("audio");
+			var lyricContainer=$("#lyricContainer");
+		   audio.bind('timeupdate',function(){
+				var t=this.currentTime;
+				$.each(r,function(i,obj){
+					  if(t>obj[0]){
+						  lyricContainer.text(obj[1]);
+					} 
+				}); 
+			});
+		});
+	});	
+function parseList(text){
+	lines=text.split("\n");
+	var result=[];//保存最终结果的数组
+	var pattern=/(\[\d{2}:\d{2}.\d{2,3}\])/g;
+	for(i=0;i<lines.length;i++){
+		if(pattern.test(lines[i])){
+			//var pattern=/(\[\d{2}:\d{2}.\d{2,3}\]).*/g; 
+			//var line=lines[i].replace(pattern,'$1');//$1表示正则分组中的第一组
+			var line=lines[i];
+			line[line.length-1]===0&&line.pop();//去掉换行符\n
+			var time=line.match(pattern),//匹配字符串
+			value=line.replace(pattern,'');//提取歌词
+			 //因为一行里面可能有多个时间，所以time有可能是[xx:xx.xx][xx:xx.xx][xx:xx.xx]的形式，需要进一步分隔
+			time.forEach(function(v1,i1,a1){//v1数组中元素，i1索引，a1数组本身
+			var t=v1.slice(1,-1).split(":");//注：slice()只针对真正的数组起作用
+			result.push([parseInt(t[0],10)*60+parseFloat(t[1]),value]);//将每行的时间和歌词压入结果数组中
+				});
+		}
+	}
+	//将结果数组中的元素按时间大小进行排序
+	result.sort(function(a,b){
+		return a[0]-b[0];
+	}); 
+	return result;
+}
+
+</script>
+</html>

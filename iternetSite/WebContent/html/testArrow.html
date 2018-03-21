@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+/* background针对背景图和背景色的不同情况，有border，padding属性时
+	background-image背景图：范围是从padding边距左上角到border边框右下角
+	background-color背景色：范围是从元素边框左上角到边框右下角
+ */
+	*{margin:0;padding: 0;}
+	.banner{float:left;}
+	.testClip{
+	  width:182px;height:700px;
+	  background-image: url("../img/lunbo/arrow.png");
+	  background-repeat:no-repeat;
+	  
+	} 
+	.testClipleft{
+		padding:430px 0px 0px 0px;
+	  	background-clip: content-box;
+		margin-top:-430px;width:37px;height:63px;
+	}
+	.testClipright{
+		padding:578px 0px 0px 0px;
+		background-clip: content-box;
+		margin-top:-578px;width:37px;height:63px;}
+	.matic{width:730px;height:336px;overflow:hidden;}
+	.dot{
+		padding:350px 0px 0px 0px;
+		background-clip:content-box;
+		width:50px;height:10px;
+	}
+</style>
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script>
+	$(function(){
+		var img;//每张图片对象
+		var images=new Array(5);//图片数组
+		var current;//用于判断第几章图索引
+		var timesID;//周期播放方法
+		/* 初始化轮播图 */
+		function init(){
+			for(var i=0;i<images.length;i++){
+				images[i]=new Image(730,336);
+				images[i].src="../img/lunbo/lunbo_"+i+".jpg";
+			} 
+			img=document.images[0];
+		}
+		/* 设置图片路径 */
+		function setSrc(i){
+			current=i;
+			img.src=images[i].src;
+		}
+		times=function(){
+			setInterval('play()',500);//每500毫秒换到下一张
+		}
+		/* 播放前一张 */
+		function pre(){
+			if(current<=0){
+				current=4;
+				setSrc(current);
+			}else{
+				current--;
+				setSrc(current);
+			}
+		}
+		/* 播放后一张 */
+		function next(){
+			if(current>=4){
+				current=0;
+				setSrc(current);
+			}else{
+				current++;
+				setSrc(current);
+			}
+		}
+		/* 自动播放 下一张*/
+		function(){
+			if(current>=4){
+				current=0;
+			}
+			setSrc(++current);
+		}
+	});
+</script>
+</head>
+<body onload="init()">
+	<div class="testClip testClipleft banner">
+	</div>
+	<div class="matic">
+	<div class="lunboimg banner">
+		<img alt="lunbo.jpg" src="../img/lunbo/lunbo_1.jpg"/><!-- src="../img/lunbo/lunbo_0.jpg" -->
+	</div>
+	<!-- <div class="lunoboimg banner">
+		<img alt="lunbo.jpg" src="../img/lunbo/lunbo_2.jpg">
+	</div>
+	<div class="lunoboimg banner">
+		<img alt="lunbo.jpg" src="../img/lunbo/lunbo_3.jpg">
+	</div> -->
+	</div>
+	<div class="testClip testClipright banner">
+	</div>
+	<div class="testClip dot"></div>
+</body>
+</html>

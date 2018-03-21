@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.music.mapper.queryCustomVoMapper">
+	<resultMap id="queryCustom" type="queryCustomVo" >
+    	<association property="singer" javaType="cn.music.po.Singer">
+    		<id column="id" property="id" jdbcType="INTEGER" />
+		    <result column="name" property="name" jdbcType="VARCHAR" />
+		    <result column="headImg" property="headimg" jdbcType="VARCHAR" />
+		    <result column="bigPic" property="bigpic" jdbcType="VARCHAR" />
+		    <result column="singerCid" property="singercid" jdbcType="INTEGER" />
+		    <result column="smallName" property="smallname" jdbcType="VARCHAR" />
+		    <result column="visitCount" property="visitcount" jdbcType="INTEGER" />
+    	</association>
+    	<association property="song" javaType="cn.music.po.Song">
+    		<id column="id" property="id" jdbcType="INTEGER" />
+		    <result column="name" property="name" jdbcType="VARCHAR" />
+		    <result column="theme" property="theme" jdbcType="VARCHAR" />
+		    <result column="album_id" property="albumId" jdbcType="INTEGER" />
+		    <result column="path" property="path" jdbcType="VARCHAR" />
+		    <result column="img" property="img" jdbcType="VARCHAR" />
+		    <result column="lrc_path" property="lrcPath" jdbcType="VARCHAR" />
+		    <result column="playNum" property="playnum" jdbcType="INTEGER" />
+		    <result column="downloadNum" property="downloadnum" jdbcType="INTEGER" />
+		    <result column="song_csid" property="songCsid" jdbcType="INTEGER" />
+		    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+		    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+		    <result column="singer_id" property="singerId" jdbcType="INTEGER" />
+		    <result column="lrc_content" property="lrcContent" jdbcType="VARCHAR" />
+    	</association>
+    </resultMap>
+  	<select id="getSongLimit" resultMap="cn.music.mapper.SongMapper.BaseResultMap">
+  		select id, name, theme, album_id, path, img, lrc_path, lrc_content,playNum, downloadNum, song_csid, 
+    createTime, updateTime from song limit 20
+  	</select>
+  	<!-- 根据关键字查询 -->
+  	<select id="getInfo" parameterType="java.lang.String" resultMap="queryCustom">
+  		    select s1.*,s2.* from singer s1,song s2 where s1.id=s2.singer_id and (
+  		  	   s1.name like '%${_parameter}%'
+  		    or s2.path like '%${_parameter}%')
+  	</select>
+  	
+  	<!-- 根据歌手id获取歌曲信息 -->
+  	<select id="getSingerSongMore" parameterType="int" resultMap="queryCustom">
+  		select s1.*,s2.* from singer s1,song s2 where s1.id=s2.singer_id and s1.id=#{singer.id}
+  	</select>
+  	
+  	<!-- 根据歌手id更新歌手信息 -->
+  	<update id="updateSinger" parameterType="cn.music.po.Singer"><!-- cn.music.po.Singer -->
+  		update singer
+	    <set >
+	      <if test="name != null" >
+	        name = #{name,jdbcType=VARCHAR},
+	      </if>
+	      <if test="headimg != null" >
+	        headImg = #{headimg,jdbcType=VARCHAR},
+	      </if>
+	      <if test="bigpic != null" >
+	        bigPic = #{bigpic,jdbcType=VARCHAR},
+	      </if>
+	      <if test="singercid != null" >
+	        singerCid = #{singercid,jdbcType=INTEGER},
+	      </if>
+	      <if test="smallname != null" >
+	        smallName = #{smallname,jdbcType=VARCHAR},
+	      </if>
+	      <if test="visitcount != null" >
+	        visitCount = #{visitcount,jdbcType=INTEGER},
+	      </if>
+	    </set>
+		<where>
+			id=#{id}
+		</where>	    
+  	</update>
+  	<!-- 歌手首页的热门歌手 -->
+  	<select id="getHot" resultType="cn.music.po.Singer">
+ 		select * from singer order by visitcount desc 	
+  	</select>
+  	<!-- 根据歌手类别获取歌手信息 -->
+  	<select id="getSingerByCid" resultType="cn.music.po.Singer">
+  		select * from singer where singerCid=#{singerCid}
+  	</select>
+  	<!-- 歌单首页的查询 :所有歌单类别-->
+  	<select id="getscm" resultType="songcatagory">
+  		select * from songcatagory where parentId=#{parentid} 
+  	</select>
+  	<!-- 歌单首页的查询 :根据歌单类别分页查询-->
+    <select id="getsmenuByCid" resultType="songmenu">
+  		select * from songmenu where smid=#{0} limit #{1},#{2}
+  	</select> 
+  	<!-- 获取某类别歌单的总记录数 -->
+  	<select id="getCountByScid" resultType="int">
+  		select count(*) from songmenu where smid=#{smid,jdbcType=INTEGER}
+  	</select>
+  	<!--  获取某歌单下歌曲的数量-->
+  	<select id="countSong" resultType="int">
+  		select count(songId) from user_song where songMenuId=#{smid};
+  	</select>
+  	<!-- 根据用户id和歌单id获取歌曲信息 -->
+  	<select id="getSongsByUSM" resultType="song">
+  		<!-- select distinct s.* from user_song us,song s where us.songId=s.id and us.uid=#{0} and us.songMenuId=#{1}; -->
+  		select s.id,s.album_id,s.path,s.img,s.lrc_path,s.playNum,s.downloadNum,s.song_csid,s.createTime,s.updateTime,s.lrc_content,s.singer_id from user_song us left join song s on us.songId=s.id where us.uid=#{0} and us.songMenuId=#{1}
+  	</select>
+  	<!-- 更新歌单信息 -->
+  	<update id="updateSongmenu" parameterType="songmenu">
+  		update songmenu set menuName=#{menuname},tag=#{tag},smid=#{smid},menuIntroduct=#{menuintroduct},menuCover=#{menucover},updateTime=#{updatetime} where id=#{id}
+  	</update>
+</mapper>

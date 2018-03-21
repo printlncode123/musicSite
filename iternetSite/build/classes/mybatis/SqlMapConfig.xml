@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <!-- 全局setting配置，对系统参数配置，具体情况具体操作：二级缓存和延迟加载等 -->
+  <!-- 配置别名，使用批量扫描包来配置别名，mybatis会扫描指定的包下的po，自动定义别名，别名就是po类名(大小写忽略) -->
+  <typeAliases>
+    <package name="cn.music.po"/>
+  </typeAliases>
+  <!--由于使用spring和mybatis的整合包进行扫秒，这里不需要配置mappers标签，必须遵循规则：mapper.java和mapper.xml在同一目录下并且他们的名称一致  -->
+</configuration>
